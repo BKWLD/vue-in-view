@@ -1,0 +1,27 @@
+{
+	"name": "vue-in-view",
+	"version": "0.0.1",
+	"description": "Vue component for triggering animations, events, and slot variables based on visibility in the viewport.",
+	"repository": "git@github.com:BKWLD/vue-in-view.git",
+	"author": "Bukwild <info@bukwild.com>",
+	"license": "MIT",
+	"main": "nuxt.js",
+	"scripts": {
+		"dev": "nuxt dev demo",
+		"build": "nuxt build demo",
+		"start": "nuxt start demo",
+		"generate": "nuxt generate demo --fail-on-error --target=static"
+	},
+	"dependencies": {
+		"@cloak-app/utils": "^1.2.0"
+	},
+	"devDependencies": {
+		"@cloak-app/boilerplate": "^1.0.8",
+		"@cloak-app/demo-theme": "^1.0.5",
+		"@nuxt/content": "^1.14.0",
+		"nuxt": "^2.15.7"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

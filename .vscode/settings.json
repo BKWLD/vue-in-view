@@ -1,0 +1,8 @@
+{
+	"vetur.format.defaultFormatter.stylus": "none",
+	"vetur.format.defaultFormatter.html": "none",
+	"vetur.format.defaultFormatter.pug": "none",
+	"javascript.format.enable": false,
+	"editor.tabSize": 2,
+	"editor.insertSpaces": false
+}
