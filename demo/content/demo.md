@@ -8,5 +8,5 @@ Additional details of the feature
 
 
 ```vue
-<cloak-vue-in-view/>
+<vue-in-view ></vue-in-view>
 ```

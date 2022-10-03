@@ -5,7 +5,7 @@
 	"repository": "git@github.com:BKWLD/vue-in-view.git",
 	"author": "Bukwild <info@bukwild.com>",
 	"license": "MIT",
-	"main": "nuxt.js",
+	"main": "components/vue-in-view.js",
 	"scripts": {
 		"dev": "nuxt dev demo",
 		"build": "nuxt build demo",

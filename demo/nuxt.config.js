@@ -15,11 +15,6 @@ export default {
 		boilerplate: {
 			siteName: 'vue-in-view demo',
 		},
-
-		// Example settings for this package
-		vueInView: {
-			blockMaxWidthClass: 'max-w',
-		}
 	},
 
 	// @nuxt/content can't be loaded from module
