@@ -1,6 +1,6 @@
 {
 	"name": "vue-in-view",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Vue component for triggering animations, events, and slot variables based on visibility in the viewport.",
 	"repository": "git@github.com:BKWLD/vue-in-view.git",
 	"author": "Bukwild <info@bukwild.com>",
