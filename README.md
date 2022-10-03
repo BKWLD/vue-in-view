@@ -8,7 +8,7 @@ Vue component for triggering animations, adding classes, firing events, and sync
 ## Install
 
 ```sh
-yarn add vue-in-view
+yarn add @bkwld/vue-in-view
 ```
 
 ### Default
