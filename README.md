@@ -68,7 +68,7 @@ For more examples, check out [the demo](https://vue-in-view.netlify.app).
 
 ### Events
 
-| ***Event**  | **Description**
+| **Event**   | **Description**
 |-------------|----------------
 | `visible`   | Fired when `in-view` intersects the viewport.
 | `hidden`    | Fired when not visible.
