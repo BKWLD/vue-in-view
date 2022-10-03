@@ -5,6 +5,7 @@
 You can use the default scoped slot to access the `visible` state.
 
 <demos-scoped-slots></demos-scoped-slots>
+<demos-scoped-slots></demos-scoped-slots>
 
 ```vue
 <vue-in-view>
