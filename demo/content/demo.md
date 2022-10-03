@@ -1,12 +1,15 @@
 # [vue-in-view](https://github.com/BKWLD/ue-in-view)
 
-## Description of a feature
+## Scoped Slot
 
-Additional details of the feature
+You can use the default scoped slot to access the `visible` state.
 
-<vue-in-view></vue-in-view>
-
+<demos-scoped-slots></demos-scoped-slots>
 
 ```vue
-<vue-in-view ></vue-in-view>
+<vue-in-view>
+  <template #default='{ visible }'>
+    <div :class='["box", { visible }]'></div>
+  </template>
+</vue-in-view>
 ```
