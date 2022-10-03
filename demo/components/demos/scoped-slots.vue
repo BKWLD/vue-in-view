@@ -6,7 +6,7 @@
           <source type="video/mp4" src='/video.mp4'>
         </video>
       </transition>
-       <div class="title">Scoped slot demo</div>
+      <div class="title">Scoped slot demo</div>
     </template>
   </in-view>
 </template>
@@ -24,6 +24,7 @@
 .title {
   font-size: 2em;
   font-weight: 300;
+  position: relative;
 }
 video {
   position: absolute;

@@ -128,6 +128,7 @@ If using it with `v-if`, like in this example, it's recommended to give the `in-
 .title {
   font-size: 2em;
   font-weight: 300;
+  position: relative;
 }
 video {
   position: absolute;
