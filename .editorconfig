@@ -13,6 +13,9 @@ insert_final_newline = true
 trim_trailing_whitespace = false
 indent_style = space
 
+[demo/components/demos/*]
+indent_style = space
+
 [*.php]
 indent_style = space
 indent_size = 4

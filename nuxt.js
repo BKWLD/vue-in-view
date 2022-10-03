@@ -5,7 +5,7 @@ export default function() {
 	this.nuxt.hook('components:dirs', dirs => {
 		dirs.push({
 			path: join(__dirname, './components'),
-			prefix: 'vue-in-view',
+			prefix: 'in-view',
 		})
 	})
 
