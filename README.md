@@ -14,7 +14,7 @@ yarn add vue-in-view
 ### Default
 
 ```js
-import InView from 'vue-in-view'
+import InView from '@bkwld/vue-in-view'
 Vue.component 'in-view', InView
 ```
 
