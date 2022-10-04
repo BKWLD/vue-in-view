@@ -23,7 +23,7 @@ Vue.component 'in-view', InView
 ```js
 // nuxt.config.js
 export default {
-  buildModules: [ 'vue-in-view/nuxt' ]
+  buildModules: [ '@bkwld/vue-in-view/nuxt' ]
 }
 ```
 
