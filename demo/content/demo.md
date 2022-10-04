@@ -1,4 +1,4 @@
-# [vue-in-view](https://github.com/BKWLD/ue-in-view)
+# [vue-in-view](https://github.com/BKWLD/vue-in-view)
 
 ## CSS animation triggering
 
