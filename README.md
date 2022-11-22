@@ -58,7 +58,7 @@ For more examples, check out [the demo](https://vue-in-view.netlify.app).
 | `animate`   | `false`     | Reset CSS animations when hidden and play them when visible.
 | `classes`   | `false`     | Adds `hidden` class when hidden and `visible` when visible.
 | `once`      | `false`     | Stops watching for viewport changes after the first instance of the component being visible.
-| `when`      | `0`         | A percentage of scroll progress of the `in-view` component into the viewport before it triggers the visible behavior.
+| `when`      | `0%`        | A px or % value for delaying when the visible effect is applied. Can be a number (`.25` for `25%`, 200 for `200px`) or a string. This is used to set the [`rootMargin`](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin) and, as such, only `px` and `%` values are supported.
 
 ### Slots
 

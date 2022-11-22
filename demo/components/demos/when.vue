@@ -1,5 +1,5 @@
 <template>
-  <in-view animate :when='.25' class="box">
+  <in-view animate when='25%' class="box">
     <span class="title">I'm now 25% into the viewport</span>
   </in-view>
 </template>

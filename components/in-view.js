@@ -5,7 +5,7 @@ export default {
 		once: Boolean, // Stop reacting after first intersection
 		classes: Boolean, // Add "visible" class to child when intersecting
 		when: {  // Used to delay triggering until farther into viewport
-			type: Number,
+			type: Number | String,
 			default: 0,
 		}
 	},
@@ -15,31 +15,35 @@ export default {
 		return {
 			visible: null, // Is the element intersecting with viewport
 			initialState: true, // Are we checking the initial state
-			viewportHeight: null,
 		}
 	},
 
 	// Start observing immediately
 	mounted() {
 		this.startObserving()
-		if (this.when) {
-			this.updateViewport()
-			window.addEventListener('resize', this.updateViewport)
-		}
 	},
 
 	// Cleanup observer
 	beforeDestroy() {
 		this.stopObserving()
-		window.removeEventListener('resize', this.updateViewport)
 	},
 
 	computed: {
 
+		// Determin the when value, which accepts numbers and strings
+		rootMarginBottom() {
+			if (!this.when) return
+			if (typeof this.when == 'string') return `-${this.when}`
+			if (typeof this.when == 'number') {
+				if (this.when >= 0 && this.when <= 1) return `-${this.when * 100}%`
+				else return `-${this.when}px`
+			}
+		},
+
 		// Calculate the intersection observer's rootMargin
 		rootMargin() {
-			if (!this.when) return
-			return `0% 0% -${this.when * 100}% 0%`
+			if (!this.rootMarginBottom) return
+			return `0% 0% ${this.rootMarginBottom} 0%`
 		}
 
 	},
@@ -108,11 +112,6 @@ export default {
 				animation.play()
 			})
 		},
-
-		// Watch for the viewport height to change
-		updateViewport() {
-			this.viewportHeight = window.innerHeight
-		}
 	},
 
 	render(create) {
