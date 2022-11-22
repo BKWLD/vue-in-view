@@ -58,6 +58,7 @@ For more examples, check out [the demo](https://vue-in-view.netlify.app).
 | `animate`   | `false`     | Reset CSS animations when hidden and play them when visible.
 | `classes`   | `false`     | Adds `hidden` class when hidden and `visible` when visible.
 | `once`      | `false`     | Stops watching for viewport changes after the first instance of the component being visible.
+| `when`      | `0`         | A percentage of scroll progress of the `in-view` component into the viewport before it triggers the visible behavior.
 
 ### Slots
 

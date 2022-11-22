@@ -4,6 +4,10 @@ export default {
 		animate: Boolean, // Control CSS animations
 		once: Boolean, // Stop reacting after first intersection
 		classes: Boolean, // Add "visible" class to child when intersecting
+		when: {  // Used to delay triggering until farther into viewport
+			type: Number,
+			default: 0,
+		}
 	},
 
 	// Store visibile state
@@ -11,17 +15,33 @@ export default {
 		return {
 			visible: null, // Is the element intersecting with viewport
 			initialState: true, // Are we checking the initial state
+			viewportHeight: null,
 		}
 	},
 
 	// Start observing immediately
 	mounted() {
 		this.startObserving()
+		if (this.when) {
+			this.updateViewport()
+			window.addEventListener('resize', this.updateViewport)
+		}
 	},
 
 	// Cleanup observer
 	beforeDestroy() {
 		this.stopObserving()
+		window.removeEventListener('resize', this.updateViewport)
+	},
+
+	computed: {
+
+		// Calculate the intersection observer's rootMargin
+		rootMargin() {
+			if (!this.when) return
+			return `0% 0% -${this.when * 100}% 0%`
+		}
+
 	},
 
 	watch: {
@@ -44,6 +64,8 @@ export default {
 				// We don't run this on the intiial state so we don't touch animations
 				// that started out playing, pre-JS.
 				else if (!this.initialState && this.visible) this.playAnimations()
+
+				// Also, if there is a non-zero until
 			}
 
 			// Respect `once` prop
@@ -61,6 +83,8 @@ export default {
 		startObserving() {
 			this.observer = new IntersectionObserver(([entry]) => {
 				this.visible = entry.isIntersecting
+			}, {
+				rootMargin: this.rootMargin
 			})
 			this.observer.observe(this.$el)
 		},
@@ -83,8 +107,12 @@ export default {
 			this.$el.getAnimations({ subtree: true }).forEach(animation => {
 				animation.play()
 			})
-		}
+		},
 
+		// Watch for the viewport height to change
+		updateViewport() {
+			this.viewportHeight = window.innerHeight
+		}
 	},
 
 	render(create) {
