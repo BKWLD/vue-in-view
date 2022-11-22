@@ -4,6 +4,10 @@ export default {
 		animate: Boolean, // Control CSS animations
 		once: Boolean, // Stop reacting after first intersection
 		classes: Boolean, // Add "visible" class to child when intersecting
+		when: {  // Used to delay triggering until farther into viewport
+			type: Number | String,
+			default: 0,
+		}
 	},
 
 	// Store visibile state
@@ -22,6 +26,26 @@ export default {
 	// Cleanup observer
 	beforeDestroy() {
 		this.stopObserving()
+	},
+
+	computed: {
+
+		// Determin the when value, which accepts numbers and strings
+		rootMarginBottom() {
+			if (!this.when) return
+			if (typeof this.when == 'string') return `-${this.when}`
+			if (typeof this.when == 'number') {
+				if (this.when >= 0 && this.when <= 1) return `-${this.when * 100}%`
+				else return `-${this.when}px`
+			}
+		},
+
+		// Calculate the intersection observer's rootMargin
+		rootMargin() {
+			if (!this.rootMarginBottom) return
+			return `0% 0% ${this.rootMarginBottom} 0%`
+		}
+
 	},
 
 	watch: {
@@ -44,6 +68,10 @@ export default {
 				// We don't run this on the intiial state so we don't touch animations
 				// that started out playing, pre-JS.
 				else if (!this.initialState && this.visible) this.playAnimations()
+
+				// Also, if there is a rootMargin, play animations in reverse when no
+				// longer visible, like as an outro
+				else if (!this.initialState && !this.visible) this.reverseAnimations()
 			}
 
 			// Respect `once` prop
@@ -61,6 +89,8 @@ export default {
 		startObserving() {
 			this.observer = new IntersectionObserver(([entry]) => {
 				this.visible = entry.isIntersecting
+			}, {
+				rootMargin: this.rootMargin
 			})
 			this.observer.observe(this.$el)
 		},
@@ -81,10 +111,18 @@ export default {
 		// Play all css animation inside the container
 		playAnimations() {
 			this.$el.getAnimations({ subtree: true }).forEach(animation => {
+				animation.playbackRate = 1
 				animation.play()
 			})
-		}
+		},
 
+		// Play all css animation inside the container backwards
+		reverseAnimations() {
+			this.$el.getAnimations({ subtree: true }).forEach(animation => {
+				animation.playbackRate = -1
+				animation.play()
+			})
+		},
 	},
 
 	render(create) {
