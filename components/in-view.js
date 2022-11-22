@@ -76,9 +76,13 @@ export default {
 				// that started out playing, pre-JS.
 				else if (!this.initialState && this.visible) this.playAnimations()
 
-				// Also, if there is a rootMargin, play animations in reverse when no
-				// longer visible, like as an outro
-				else if (!this.initialState && !this.visible) this.reverseAnimations()
+				// Play animations in reverse when no longer visible, like as an outro.
+				// If the animations start delayed, reverse them.  Otherwise, we can
+				// just hard reset when they aren't visible
+				else if (!this.initialState && !this.visible) {
+					if (this.rootMarginBottom) this.reverseAnimations()
+					else this.resetAnimations()
+				}
 			}
 
 			// Respect `once` prop
