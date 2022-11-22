@@ -7,7 +7,14 @@ export default {
 		when: {  // Used to delay triggering until farther into viewport
 			type: Number | String,
 			default: 0,
-		}
+		},
+		target: {
+			type: String,
+			default: 'descendants',
+			validator(val) {
+				return ['self', 'children', 'descendants'].includes(val)
+			},
+		},
 	},
 
 	// Store visibile state
@@ -69,9 +76,13 @@ export default {
 				// that started out playing, pre-JS.
 				else if (!this.initialState && this.visible) this.playAnimations()
 
-				// Also, if there is a rootMargin, play animations in reverse when no
-				// longer visible, like as an outro
-				else if (!this.initialState && !this.visible) this.reverseAnimations()
+				// Play animations in reverse when no longer visible, like as an outro.
+				// If the animations start delayed, reverse them.  Otherwise, we can
+				// just hard reset when they aren't visible
+				else if (!this.initialState && !this.visible) {
+					if (this.rootMarginBottom) this.reverseAnimations()
+					else this.resetAnimations()
+				}
 			}
 
 			// Respect `once` prop
@@ -100,9 +111,21 @@ export default {
 			if (this.observer) this.observer.disconnect()
 		},
 
+		// Get the array of animationed to control
+		getAnimations() {
+			switch(this.target) {
+				case 'self': return this.$el.getAnimations()
+				case 'children':
+					return Array.from(this.$el.children).reduce((animations, child) => {
+						return animations.concat(child.getAnimations())
+					}, [])
+				case 'descendants': return this.$el.getAnimations({ subtree: true })
+			}
+		},
+
 		// Restart all css animations inside the container
 		resetAnimations() {
-			this.$el.getAnimations({ subtree: true }).forEach(animation => {
+			this.getAnimations().forEach(animation => {
 				animation.pause()
 				animation.currentTime = 0
 			})
@@ -110,7 +133,7 @@ export default {
 
 		// Play all css animation inside the container
 		playAnimations() {
-			this.$el.getAnimations({ subtree: true }).forEach(animation => {
+			this.getAnimations().forEach(animation => {
 				animation.playbackRate = 1
 				animation.play()
 			})
@@ -118,7 +141,7 @@ export default {
 
 		// Play all css animation inside the container backwards
 		reverseAnimations() {
-			this.$el.getAnimations({ subtree: true }).forEach(animation => {
+			this.getAnimations().forEach(animation => {
 				animation.playbackRate = -1
 				animation.play()
 			})
