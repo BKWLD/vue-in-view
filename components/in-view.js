@@ -57,6 +57,12 @@ export default {
 
 	watch: {
 
+		// Rebuild intersection obserer when root margin changes
+		rootMargin() {
+			this.stopObserving()
+			this.startObserving()
+		},
+
 		// React to visiblity changes
 		visible() {
 
@@ -90,7 +96,7 @@ export default {
 
 			// We've now processed the initial state
 			this.initialState = false
-		}
+		},
 
 	},
 
