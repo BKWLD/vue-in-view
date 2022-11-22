@@ -69,7 +69,9 @@ export default {
 				// that started out playing, pre-JS.
 				else if (!this.initialState && this.visible) this.playAnimations()
 
-				// Also, if there is a non-zero until
+				// Also, if there is a rootMargin, play animations in reverse when no
+				// longer visible, like as an outro
+				else if (!this.initialState && !this.visible) this.reverseAnimations()
 			}
 
 			// Respect `once` prop
@@ -109,6 +111,15 @@ export default {
 		// Play all css animation inside the container
 		playAnimations() {
 			this.$el.getAnimations({ subtree: true }).forEach(animation => {
+				animation.playbackRate = 1
+				animation.play()
+			})
+		},
+
+		// Play all css animation inside the container backwards
+		reverseAnimations() {
+			this.$el.getAnimations({ subtree: true }).forEach(animation => {
+				animation.playbackRate = -1
 				animation.play()
 			})
 		},

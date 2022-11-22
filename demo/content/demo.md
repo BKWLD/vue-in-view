@@ -211,13 +211,13 @@ strong {
 
 ## Delay until farther into viewport
 
-This waits to trigger the in-viewport behavior until the element is 25% into the viewport.
+This waits to trigger the in-viewport behavior until the element is 25% into the viewport. If scrolled back out, it will play in the reverse direction.
 
 <demos-when></demos-when>
 
 ```vue
 <template>
-  <in-view animate :when='.25' class="box">
+  <in-view animate when='25%' class="box">
     <span class="title">I'm now 25% into the viewport</span>
   </in-view>
 </template>
@@ -235,7 +235,7 @@ This waits to trigger the in-viewport behavior until the element is 25% into the
 .title {
   font-size: 2em;
   font-weight: 300;
-  animation: title-intro 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: title-intro 1s both;
 }
 @keyframes title-intro {
   from {

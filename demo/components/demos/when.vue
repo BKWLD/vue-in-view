@@ -17,7 +17,7 @@
 .title {
   font-size: 2em;
   font-weight: 300;
-  animation: title-intro 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: title-intro 1s both;
 }
 @keyframes title-intro {
   from {
