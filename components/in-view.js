@@ -4,6 +4,10 @@ export default {
 		animate: Boolean, // Control CSS animations
 		once: Boolean, // Stop reacting after first intersection
 		classes: Boolean, // Add "visible" class to child when intersecting
+		element: { // The HTML element to be rendered
+			type: String,
+			default: 'div'
+		},
 		when: {  // Used to delay triggering until farther into viewport
 			type: Number | String,
 			default: 0,
@@ -159,7 +163,7 @@ export default {
 		// Make wrapper component that is used to measure visibility from.  I'd
 		// love to have an implementation that didn't require nesting thse slot in
 		// the wrapper div but Vue just doesn't give an API for this.
-		return create('div', {
+		return create(this.element, {
 
 			// Add dynamic classes
 			class: this.classes ? (this.visible ? 'visible' : 'hidden') : undefined,
